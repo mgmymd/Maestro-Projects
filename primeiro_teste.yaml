@@ -1,0 +1,39 @@
+# Testando estrutura do script do maestro e o aplicativo Contatos
+
+# appID é obrigatório, deve indicar o app que será testado
+appId: com.google.android.contacts
+# O --- é um separador de documento. Essencial por separar a configuração (como appId) dos comandos de teste (flows).
+---
+
+# Etapas do teste organizadas em blocos de ações e respectivas validações
+- tapOn: contacts
+- assertVisible: No contacts yet
+
+- tapOn: "Create contact"
+- assertVisible: "Create contact"
+
+- tapOn: "First name"
+- inputText: "Primeiro teste"
+- assertVisible: "Primeiro teste"
+
+- swipe:
+    direction: UP
+- assertVisible: "Phone"
+- tapOn: "Phone"
+- inputText: +55 16 111111111
+- assertVisible: "+55 16 111111111 "
+
+- scroll
+- tapOn: "Label"
+- assertVisible: "Home"
+- tapOn: "Home"
+
+- tapOn: "Save"
+- assertVisible: ".*saved*"
+
+- assertVisible: "Primeiro teste"
+- assertVisible: "+55 16 111111111"
+- assertVisible: "Home"
+
+# Teardown
+- stopApp: com.google.android.contacts

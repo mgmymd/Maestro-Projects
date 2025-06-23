@@ -7,3 +7,5 @@ node_modules/
 
 # Maestro Cache and Temporaries
 .maestro/
+
+*.apk
