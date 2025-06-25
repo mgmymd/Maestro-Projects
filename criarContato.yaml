@@ -1,0 +1,52 @@
+# Criar 1 contato
+
+appId: com.google.android.contacts
+---
+- tapOn: "Contacts"
+- assertVisible: No contacts yet
+- assertVisible: "No contacts yet"
+- tapOn: "Create contact"
+- assertVisible: "Create contact"
+
+- tapOn: "First name"
+- inputText: "Melissa"
+
+- scrollUntilVisible:
+    element: "Phone"
+    direction: "DOWN"
+- assertVisible: "Phone"
+- tapOn: "Phone"
+- inputText: "999999999"
+
+
+- scrollUntilVisible:
+    element: "Label"
+    direction: "DOWN"
+- tapOn: "Label"
+- tapOn:
+    text: "Home"
+    index: 0
+- assertVisible: "Home"
+
+- tapOn: "Email"
+- inputText: "fake@email.com"
+
+- scrollUntilVisible:
+    element:
+      id: "com.google.android.contacts:id/more_fields"
+    direction: "DOWN"
+- tapOn:
+    id: "com.google.android.contacts:id/more_fields"
+- scrollUntilVisible:
+    element: "Address"
+    direction: "DOWN"
+
+- tapOn: "Address"
+- inputText: "Jiufen"
+- tapOn: "Save"
+- assertVisible: ".*saved*"
+
+- assertVisible: "Melissa"
+- assertVisible: "(999) 999-999"
+- assertVisible: "Jiufen"
+- assertVisible: "fake@mail.com"

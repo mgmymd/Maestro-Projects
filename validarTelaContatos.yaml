@@ -1,0 +1,9 @@
+# Testando estrutura do script do maestro e o aplicativo Contatos
+
+# appID é obrigatório, deve indicar o app que será testado
+appId: com.google.android.contacts
+# O --- é um separador de documento. Essencial por separar a configuração (como appId) dos comandos de teste (flows).
+---
+# Etapas do teste organizadas em blocos de ações e respectivas validações
+- launchApp: com.google.android.contacts
+- assertVisible: No contacts yet

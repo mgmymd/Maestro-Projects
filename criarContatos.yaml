@@ -1,0 +1,64 @@
+# Usando repeat e env
+
+appId: com.google.android.contacts
+env:
+  NAME_0: "Melissa"
+  NAME_1: "Jaqueline"
+  NAME_2: "Beatriz"
+
+  NUMBER_0: "9"
+  NUMBER_1: "8"
+  NUMBER_2: "7"
+
+  EMAIL_0: "9@fakeemail"
+  EMAIL_1: "8@fakeemail"
+  EMAIL_2: "7@fakeemail"
+
+  ADDRESS_0: "Jiufen"
+  ADDRESS_1: "Koriko"
+  ADDRESS_2: "Ingary"
+---
+- tapOn: "Contacts"
+- assertVisible: No contacts yet
+- repeat:
+    times: 3
+    commands:
+      - tapOn: "Create contact"
+      - assertVisible: "Create contact"
+
+      - tapOn: "First name"
+      - inputText: ${"NAME_" + __index__}
+
+      - scrollUntilVisible:
+          element: "Phone"
+          direction: "DOWN"
+      - tapOn: "Phone"
+      - inputText: ${"NUMBER_" + __index__}
+
+      - scrollUntilVisible:
+          element: "Label"
+          direction: "DOWN"
+      - tapOn: "Label"
+      - tapOn:
+          text: "Home"
+          index: 0
+
+      - tapOn: "Email"
+      - inputText: ${"EMAIL_" + __index__}
+
+      - scrollUntilVisible:
+          element:
+            id: "com.google.android.contacts:id/more_fields"
+          direction: "DOWN"
+      - tapOn:
+          id: "com.google.android.contacts:id/more_fields"
+
+      - scrollUntilVisible:
+          element: "Address"
+          direction: "DOWN"
+      - tapOn: "Address"
+      - inputText: ${"ADDRESS_" + __index__}
+
+      - tapOn: "Save"
+      - assertVisible: ".*saved*"
+      - back
