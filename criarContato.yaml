@@ -2,6 +2,9 @@
 
 appId: com.google.android.contacts
 ---
+# Executar o arquivo JS
+- runScript: "contatos/valores.js"
+
 # Abrindo o app, launchApp não está funcionando
 - tapOn: "Contacts"
 
@@ -24,8 +27,8 @@ appId: com.google.android.contacts
 
 # Inserindo nome e validando entrada
 - tapOn: "First name"
-- inputText: "Melissa"
-- assertVisible: "Melissa"
+- inputText: ${output.contatos.contato1.nome}
+- assertVisible: ${output.contatos.contato1.nome}
 
 # Inserindo número de telefone, classificação e validando entrada
 - scrollUntilVisible:
@@ -33,8 +36,8 @@ appId: com.google.android.contacts
     direction: "DOWN"
 - assertVisible: "Phone"
 - tapOn: "Phone"
-- inputText: "999999999"
-- assertVisible: "(999) 999-999"
+- inputText: ${output.contatos.contato1.telefone}
+- assertVisible: ${output.contatos.contato1.telefone_visível}
 - scrollUntilVisible:
     element: "Label"
     direction: "DOWN"
@@ -46,9 +49,9 @@ appId: com.google.android.contacts
 
 # Inserindo e-mail e validando
 - tapOn: "Email"
-- inputText: "fake@email.com"
+- inputText: ${output.contatos.contato1.email}
 - assertVisible:
-    text: "fake@email.com"
+    text: ${output.contatos.contato1.email}
     index: 0
 
 # Inserindo endereço
@@ -62,7 +65,7 @@ appId: com.google.android.contacts
     element: "Address"
     direction: "DOWN"
 - tapOn: "Address"
-- inputText: "Jiufen"
+- inputText: ${output.contatos.contato1.endereco}
 - tapOn:
     id: "com.google.android.contacts:id/place_autocomplete_prediction_primary_text"
     index: 4
@@ -72,10 +75,10 @@ appId: com.google.android.contacts
 # Validando tela do contato criado
 - waitForAnimationToEnd:
     timeout: 9000
-- assertVisible: "Melissa"
+- assertVisible: ${output.contatos.contato1.nome}
 - assertVisible:
     id: "com.google.android.contacts:id/large_title"
-- assertVisible: "(999) 999-999"
+- assertVisible: ${output.contatos.contato1.telefone_visível}
 - assertVisible: "Jiufen St, Xiaying District, Tainan City, Taiwan 735"
 - assertVisible:
     id: "com.google.android.contacts:id/header"
