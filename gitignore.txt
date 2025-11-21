@@ -9,3 +9,4 @@ node_modules/
 .maestro/
 
 *.apk
+*.mp4

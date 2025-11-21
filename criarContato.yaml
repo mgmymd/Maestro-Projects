@@ -1,24 +1,40 @@
-# Criar 1 contato
+# TC1 - criar um primeiro contato com sucesso
 
 appId: com.google.android.contacts
 ---
+# Abrindo o app, launchApp não está funcionando
 - tapOn: "Contacts"
-- assertVisible: No contacts yet
-- assertVisible: "No contacts yet"
-- tapOn: "Create contact"
-- assertVisible: "Create contact"
 
+# Sem contatos registrados
+- runFlow:
+    when:
+      visible: "No contacts yet"
+    commands:
+      - assertVisible: "No contacts yet"
+      - tapOn: "Create contact"
+      - assertVisible: "Create contact"
+
+# Com contatos registrados
+- runFlow:
+    when:
+      notVisible: "No contacts yet"
+    commands:
+      - tapOn: "Create contact"
+      - assertVisible: "Create contact"
+
+# Inserindo nome e validando entrada
 - tapOn: "First name"
 - inputText: "Melissa"
+- assertVisible: "Melissa"
 
+# Inserindo número de telefone, classificação e validando entrada
 - scrollUntilVisible:
     element: "Phone"
     direction: "DOWN"
 - assertVisible: "Phone"
 - tapOn: "Phone"
 - inputText: "999999999"
-
-
+- assertVisible: "(999) 999-999"
 - scrollUntilVisible:
     element: "Label"
     direction: "DOWN"
@@ -28,9 +44,14 @@ appId: com.google.android.contacts
     index: 0
 - assertVisible: "Home"
 
+# Inserindo e-mail e validando
 - tapOn: "Email"
 - inputText: "fake@email.com"
+- assertVisible:
+    text: "fake@email.com"
+    index: 0
 
+# Inserindo endereço
 - scrollUntilVisible:
     element:
       id: "com.google.android.contacts:id/more_fields"
@@ -40,13 +61,22 @@ appId: com.google.android.contacts
 - scrollUntilVisible:
     element: "Address"
     direction: "DOWN"
-
 - tapOn: "Address"
 - inputText: "Jiufen"
+- tapOn:
+    id: "com.google.android.contacts:id/place_autocomplete_prediction_primary_text"
+    index: 4
+- assertVisible: "Jiufen St, Xiaying District, Tainan City, Taiwan 735"
 - tapOn: "Save"
-- assertVisible: ".*saved*"
 
+# Validando tela do contato criado
+- waitForAnimationToEnd:
+    timeout: 9000
 - assertVisible: "Melissa"
+- assertVisible:
+    id: "com.google.android.contacts:id/large_title"
 - assertVisible: "(999) 999-999"
-- assertVisible: "Jiufen"
-- assertVisible: "fake@mail.com"
+- assertVisible: "Jiufen St, Xiaying District, Tainan City, Taiwan 735"
+- assertVisible:
+    id: "com.google.android.contacts:id/header"
+    index: 1

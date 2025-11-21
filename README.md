@@ -1,14 +1,7 @@
 # Maestro-Projects
-## corrigir:
-- Atualmente é necessário usar esse comando para abrir o emulador: .\emulator.exe android34 -accel off
-- corrigir criarContatos.yaml e estudar como fazer algo dinâmico
-
 ## fazer:
-- fazer o setup e o teardown em arquivos separados e estudar como chamar no fluxo em teste
-- usar listas para validação de itens
-- procurar o comando do botão “Aplicativos Recentes”
-- criar uma env
-- usar loops
+- reorganizar
+- ativar o GraalJS
 
 ## Comandos úteis:
 - Gravar um vídeo: 
@@ -19,4 +12,3 @@
 - Abrir o seletor: maestro studio
 - Verificar quais dispositivos estão conectados: adb devices
 - Verificar todos os apps instalados: adb shell pm list packages
-- Finalizar validarTelaContatos
